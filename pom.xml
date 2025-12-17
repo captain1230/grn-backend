@@ -7,101 +7,46 @@
     <groupId>com.sssys.grn</groupId>
     <artifactId>grn-backend</artifactId>
     <version>1.0.0</version>
+    <packaging>pom</packaging>
 
     <name>grn</name>
-    <description>grn后端服务（Spring Boot 3.0适配版）</description>
+    <description>grn后端服务（Spring Boot 3.2 LTS 适配版）</description>
+
     <modules>
         <module>grn-framework</module>
+        <!-- 可在此添加其他子模块 -->
     </modules>
-    <dependencies>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.1.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-redis</artifactId>
-        </dependency>
-        <!-- Redisson核心依赖（适配Spring Boot 3/Jakarta EE） -->
-        <dependency>
-            <groupId>org.redisson</groupId>
-            <artifactId>redisson-spring-boot-starter</artifactId>
-            <version>3.52.0</version>
-        </dependency>
-    </dependencies>
-    <packaging>pom</packaging>
 
     <properties>
         <grn.version>1.0.0</grn.version>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <!-- 1. Java版本升级为17（Spring Boot 3最低要求） -->
-        <java.version>17</java.version>
-        <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
-        <!-- 2. Spring Boot 3.0稳定版 -->
-        <spring-boot.version>3.0.10</spring-boot.version>
-        <!-- 3. 适配Spring Boot 3的依赖版本 -->
+
+        <!-- Spring Boot 3.2 LTS -->
+        <spring-boot.version>3.2.12</spring-boot.version>
+
+        <!-- 第三方依赖版本（仅列出 Spring Boot 未管理或需覆盖的） -->
         <druid.version>1.2.20</druid.version>
-        <yauaa.version>8.1.0</yauaa.version>
-        <kaptcha.version>2.3.3</kaptcha.version>
-        <pagehelper.boot.version>1.4.8</pagehelper.boot.version>
+        <mybatis-plus.version>3.5.6</mybatis-plus.version> <!-- 兼容 Boot 3.2 -->
+        <redisson.version>3.27.2</redisson.version>
         <fastjson.version>2.0.60</fastjson.version>
+        <hutool.version>5.8.22</hutool.version>
+        <yauaa.version>7.30.0</yauaa.version>
+        <kaptcha.version>2.3.3</kaptcha.version>
+        <pagehelper.boot.version>1.4.7</pagehelper.boot.version>
         <oshi.version>7.1.0</oshi.version>
         <commons.io.version>2.21.0</commons.io.version>
         <poi.version>5.2.5</poi.version>
         <velocity.version>2.3</velocity.version>
-        <!-- JJWT升级到适配Spring Boot 3的版本（拆分依赖） -->
-        <jwt.version>0.11.5</jwt.version>
-        <!-- 4. 核心框架版本适配 -->
-        <tomcat.version>10.1.18</tomcat.version>
-        <logback.version>1.4.11</logback.version>
-        <spring-security.version>6.0.5</spring-security.version>
-        <spring-framework.version>6.0.12</spring-framework.version>
-        <!-- SpringDoc OpenAPI 3（适配Spring Boot 3） -->
-        <springdoc.version>2.0.2</springdoc.version>
-        <!-- MyBatis Spring Boot Starter（适配Spring Boot 3） -->
-        <mybatis-spring-boot.version>3.0.3</mybatis-spring-boot.version>
-        <!-- 新增：MyBatis-Plus适配Spring Boot 3的版本 -->
-        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
-        <!-- 新增：Hutool适配Java 17/Spring Boot 3的版本 -->
-        <hutool.version>5.8.22</hutool.version>
-        <!-- 新增数据库版本 -->
-        <!-- 适配Spring Boot 3的MySQL驱动 -->
+        <jwt.version>0.12.6</jwt.version>
         <mysql.version>8.0.33</mysql.version>
-        <!-- 适配Spring Boot 3 -->
-        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
-        <!-- 适配Spring Boot 3 -->
-        <druid.version>1.2.20</druid.version>
+        <springdoc.version>2.8.13</springdoc.version> <!-- 适配 Boot 3.2 -->
     </properties>
 
-    <!-- 依赖声明 -->
+    <!-- 仅导入 Spring Boot 官方 BOM，让其管理所有内建依赖 -->
     <dependencyManagement>
         <dependencies>
-            <!-- 覆盖SpringFramework的依赖配置（Spring 6.x）-->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-framework-bom</artifactId>
-                <version>${spring-framework.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <!-- 覆盖SpringSecurity的依赖配置（Spring Security 6.x）-->
-            <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-bom</artifactId>
-                <version>${spring-security.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <!-- SpringBoot 3.0依赖配置（核心）-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -110,99 +55,80 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- 覆盖logback的依赖配置（适配Spring Boot 3）-->
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-core</artifactId>
-                <version>${logback.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>${logback.version}</version>
-            </dependency>
-
-            <!-- 覆盖tomcat的依赖配置（Tomcat 10.x适配Jakarta EE 9）-->
-            <dependency>
-                <groupId>org.apache.tomcat.embed</groupId>
-                <artifactId>tomcat-embed-core</artifactId>
-                <version>${tomcat.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.tomcat.embed</groupId>
-                <artifactId>tomcat-embed-el</artifactId>
-                <version>${tomcat.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.tomcat.embed</groupId>
-                <artifactId>tomcat-embed-websocket</artifactId>
-                <version>${tomcat.version}</version>
-            </dependency>
-
-            <!-- 阿里数据库连接池（支持Spring Boot 3） -->
+            <!-- 第三方 starter（Spring Boot 未内置管理） -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
             </dependency>
 
-            <!-- 解析客户端操作系统、浏览器等 -->
             <dependency>
-                <groupId>nl.basjes.parse.useragent</groupId>
-                <artifactId>yauaa</artifactId>
-                <version>${yauaa.version}</version>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
             </dependency>
 
-            <!-- pagehelper 分页插件（适配Spring Boot 3） -->
             <dependency>
-                <groupId>com.github.pagehelper</groupId>
-                <artifactId>pagehelper-spring-boot-starter</artifactId>
-                <version>${pagehelper.boot.version}</version>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
             </dependency>
 
-            <!-- 获取系统信息（适配Java 17） -->
-            <dependency>
-                <groupId>com.github.oshi</groupId>
-                <artifactId>oshi-core</artifactId>
-                <version>${oshi.version}</version>
-            </dependency>
-
-            <!-- OpenAPI 3 核心依赖（适配Spring Boot 3） -->
-            <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-                <version>${springdoc.version}</version>
-            </dependency>
-
-            <!-- io常用工具类 -->
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>${commons.io.version}</version>
-            </dependency>
-
-            <!-- excel工具（升级到适配Java 17的版本） -->
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi-ooxml</artifactId>
-                <version>${poi.version}</version>
-            </dependency>
-
-            <!-- velocity代码生成使用模板 -->
-            <dependency>
-                <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity-engine-core</artifactId>
-                <version>${velocity.version}</version>
-            </dependency>
-
-            <!-- 阿里JSON解析器 -->
             <dependency>
                 <groupId>com.alibaba.fastjson2</groupId>
                 <artifactId>fastjson2</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
 
-            <!-- Token生成与解析（JJWT升级，拆分依赖） -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>nl.basjes.parse.useragent</groupId>
+                <artifactId>yauaa</artifactId>
+                <version>${yauaa.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>pro.fessional</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.oshi</groupId>
+                <artifactId>oshi-core</artifactId>
+                <version>${oshi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons.io.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>${velocity.version}</version>
+            </dependency>
+
+            <!-- JWT -->
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt-api</artifactId>
@@ -221,67 +147,31 @@
                 <scope>runtime</scope>
             </dependency>
 
-            <!-- 验证码 -->
+            <!-- OpenAPI 文档 -->
             <dependency>
-                <groupId>pro.fessional</groupId>
-                <artifactId>kaptcha</artifactId>
-                <version>${kaptcha.version}</version>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>3.0.0</version>
             </dependency>
 
-            <!-- MyBatis Spring Boot Starter（适配Spring Boot 3） -->
-            <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis-spring-boot.version}</version>
-            </dependency>
-
-            <!-- 新增：MyBatis-Plus Boot Starter（适配Spring Boot 3） -->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus.version}</version>
-            </dependency>
-
-            <!-- 新增：Hutool工具包 -->
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
-            </dependency>
-
-            <!-- 系统模块（修正groupId：子模块继承父模块groupId，无需额外加.framework） -->
-            <dependency>
-                <groupId>com.sssys.grn</groupId>
-                <artifactId>grn-framework</artifactId>
-                <version>${grn.version}</version>
-            </dependency>
-            <!-- MySQL驱动 -->
+            <!-- MySQL 驱动 -->
             <dependency>
                 <groupId>com.mysql</groupId>
                 <artifactId>mysql-connector-j</artifactId>
                 <version>${mysql.version}</version>
             </dependency>
 
-            <!-- MyBatis-Plus -->
+            <!-- 内部模块 -->
             <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>${mybatis-plus.version}</version>
+                <groupId>com.sssys.grn</groupId>
+                <artifactId>grn-framework</artifactId>
+                <version>${grn.version}</version>
             </dependency>
-
-            <!-- Druid连接池 -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${druid.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 
     <build>
         <plugins>
-            <!-- 升级编译器插件适配Java 17 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -289,55 +179,42 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <!-- 兼容旧代码的编译参数（可选） -->
-                    <compilerArgs>
-                        <arg>-Xlint:unchecked</arg>
-                    </compilerArgs>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
 
-            <!-- Spring Boot 3.0打包插件（必须添加，否则无法打包可执行JAR） -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <!-- 注意：父 POM 不应绑定 spring-boot-maven-plugin，
+                 应在可执行子模块（如 application）中配置 -->
         </plugins>
     </build>
 
     <repositories>
+        <!-- 优先使用 Maven Central -->
         <repository>
-            <id>public</id>
-            <name>aliyun nexus</name>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>https://repo1.maven.org/maven2</url>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>false</enabled></snapshots>
+        </repository>
+
+        <!-- 阿里云作为备用（可选） -->
+        <repository>
+            <id>aliyun-public</id>
+            <name>Aliyun Public</name>
             <url>https://maven.aliyun.com/repository/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>false</enabled></snapshots>
         </repository>
     </repositories>
 
     <pluginRepositories>
         <pluginRepository>
-            <id>public</id>
-            <name>aliyun nexus</name>
+            <id>aliyun-public</id>
+            <name>Aliyun Public Repository</name>
             <url>https://maven.aliyun.com/repository/public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+            <releases><enabled>true</enabled></releases>
+            <snapshots><enabled>false</enabled></snapshots>
         </pluginRepository>
     </pluginRepositories>
 </project>

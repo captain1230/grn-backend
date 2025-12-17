@@ -4,49 +4,55 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>com.sssys.grn</artifactId>
-        <groupId>grn-backend</groupId>
+        <groupId>com.sssys.grn</groupId>
+        <artifactId>grn-backend</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>grn-framework</artifactId>
-    <packaging>jar</packaging>
-    <dependencies>
 
-        <!--  spring security -->
+    <!-- 子模块自身的artifactId（不能和根模块重复） -->
+    <artifactId>grn-framework</artifactId>
+    <!-- 子模块打包方式：非父模块必须是jar（根模块才是pom） -->
+    <packaging>jar</packaging>
+
+    <name>grn-framework</name>
+    <description>grn框架核心模块</description>
+
+    <dependencies>
+        <!-- ========== Redis核心依赖 ========== -->
+        <!-- Spring Data Redis（含Lettuce客户端，Spring Boot 3默认） -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <!-- mybatis -->
+        <!-- Redisson核心依赖（适配Spring Boot 3/Jakarta EE） -->
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
         </dependency>
-        <!-- mybatis plus -->
+        <!-- Hutool工具包（你的配置类用到了ReflectUtil） -->
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
         </dependency>
-
-        <!-- Spring Context -->
+        <!-- Spring Boot基础依赖 -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
-        <!-- Spring Data Redis -->
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-redis</artifactId>
-        </dependency>
-        <!-- 其他必要依赖 -->
+        <!-- Jackson核心依赖 -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
-        <!-- hutool -->
+        <!-- Jackson注解支持（增强序列化能力） -->
         <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-parameter-names</artifactId>
+        </dependency>
+        <!-- Jackson Java 8时间模块（解决LocalDateTime序列化问题） -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
     </dependencies>
 

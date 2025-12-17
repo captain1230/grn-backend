@@ -9,37 +9,21 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
-    <artifactId>grn-admin</artifactId>
+    <artifactId>grn-server</artifactId>
+    <name>${project.artifactId}</name>
 
     <description>
-        web服务入口
+        后端 Server 的主项目，通过引入需要 module-xxx 的依赖，
+        从而实现提供 RESTful API 给等前端项目。
+        本质上来说，它就是个空壳（容器）！
     </description>
 
     <dependencies>
-
-        <!-- spring-boot-devtools -->
+        <!-- spring boot 配置所需依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <optional>true</optional> <!-- 表示依赖不会传递 -->
-        </dependency>
-
-        <!-- ========== 替换为OpenAPI 3.0（springdoc-openapi） ========== -->
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-        </dependency>
-
-        <!-- Mysql驱动包 -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-
-        <!-- 核心模块-->
-        <dependency>
-            <groupId>com.sssys.grn</groupId>
-            <artifactId>ruoyi-framework</artifactId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 

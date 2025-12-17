@@ -19,11 +19,16 @@
     </description>
 
     <dependencies>
-        <!-- spring boot 配置所需依赖 -->
+        <!-- 引入Spring Boot Web Starter（核心依赖） -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 引入Spring Boot 应用启动器（包含@SpringBootApplication等注解） -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 
@@ -34,7 +39,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.5.15</version>
                 <configuration>
-                    <fork>true</fork> <!-- 如果没有该配置，devtools不会生效 -->
+                    <fork>true</fork>
                 </configuration>
                 <executions>
                     <execution>

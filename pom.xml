@@ -24,7 +24,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Spring Boot 3.2 LTS -->
-        <spring-boot.version>3.2.12</spring-boot.version>
+        <spring-boot.version>3.5.8</spring-boot.version>
 
         <!-- 第三方依赖版本（仅列出 Spring Boot 未管理或需覆盖的） -->
         <druid.version>1.2.20</druid.version>

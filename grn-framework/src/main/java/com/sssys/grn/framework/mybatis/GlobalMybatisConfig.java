@@ -17,7 +17,6 @@ import org.springframework.context.annotation.Configuration;
  * @Date: 09:39 2025/12/18
  */
 @Configuration
-@MapperScan("com.sssys.grn.**.mapper") // 扫描所有模块的mapper接口
 public class GlobalMybatisConfig {
 
     private final CustomIdGenerator customIdGenerator;

@@ -18,19 +18,32 @@
         本质上来说，它就是个空壳（容器）！
     </description>
 
+    <!-- grn-server/pom.xml -->
     <dependencies>
-        <!-- 引入Spring Boot Web Starter（核心依赖） -->
+        <!-- 依赖 system 业务模块 -->
+        <dependency>
+            <groupId>com.sssys.grn</groupId>
+            <artifactId>grn-system</artifactId>
+            <version>1.0.0</version> <!-- 版本与 system 模块一致 -->
+        </dependency>
+
+        <!-- 其他核心依赖：Spring Boot Starter、MyBatis-Plus、数据库驱动等 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
-        <!-- 引入Spring Boot 应用启动器（包含@SpringBootApplication等注解） -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sssys.grn</groupId>
+            <artifactId>grn-system</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
+
 
     <build>
         <plugins>

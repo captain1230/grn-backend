@@ -13,39 +13,44 @@
     <name>${project.artifactId}</name>
 
     <description>
-        后端 Server 的主项目，通过引入需要 module-xxx 的依赖，
-        从而实现提供 RESTful API 给等前端项目。
-        本质上来说，它就是个空壳（容器）！
+        后端Server主项目（容器），通过引入业务模块（如grn-system）提供RESTful API，
+        不包含具体业务逻辑，仅负责整合与启动。
     </description>
 
     <dependencies>
-        <!-- 依赖 system 业务模块（按需开启） -->
+
+        <!-- 引入业务模块（按需开启） -->
         <dependency>
             <groupId>com.sssys.grn</groupId>
             <artifactId>grn-system</artifactId>
-            <version>1.0.0</version>
         </dependency>
-        <!-- 核心依赖 -->
+
+        <!-- Web服务核心依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
 
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
+            <!-- Spring Boot打包插件（仅在可执行模块配置） -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- 显式指定启动类，避免打包时找不到主类 -->
+                    <mainClass>com.sssys.grn.GrnServerApplication</mainClass>
+                    <layout>JAR</layout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal> <!-- 生成可执行jar -->
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

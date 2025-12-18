@@ -12,13 +12,13 @@
     <name>grn</name>
     <description>grn后端服务（Spring Boot 3.2 LTS 适配版）</description>
 
+    <!-- 子模块列表（只保留启用的模块，保持与实际一致） -->
     <modules>
         <module>grn-framework</module>
         <module>grn-server</module>
         <module>grn-system</module>
-<!--        <module>grn-common</module>-->
-
-        <!-- 可在此添加其他子模块 -->
+        <!-- 如需启用common模块，取消注释并确保模块存在 -->
+        <!-- <module>grn-common</module> -->
     </modules>
 
     <properties>
@@ -27,12 +27,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-        <!-- Spring Boot 3.2 LTS -->
+        <!-- Spring Boot 核心版本（LTS版本） -->
         <spring-boot.version>3.3.0</spring-boot.version>
 
-        <!-- 第三方依赖版本（仅列出 Spring Boot 未管理或需覆盖的） -->
+        <!-- 第三方依赖版本（集中管理，子模块无需重复声明） -->
         <druid.version>1.2.20</druid.version>
-        <mybatis-plus.version>3.5.7</mybatis-plus.version> <!-- 兼容 Boot 3.2 -->
+        <mybatis-plus.version>3.5.7</mybatis-plus.version>
         <redisson.version>3.27.2</redisson.version>
         <fastjson.version>2.0.60</fastjson.version>
         <hutool.version>5.8.22</hutool.version>
@@ -45,12 +45,13 @@
         <velocity.version>2.3</velocity.version>
         <jwt.version>0.12.6</jwt.version>
         <mysql.version>8.0.33</mysql.version>
-        <springdoc.version>2.8.13</springdoc.version> <!-- 适配 Boot 3.2 -->
+        <springdoc.version>2.8.13</springdoc.version>
     </properties>
 
-    <!-- 仅导入 Spring Boot 官方 BOM，让其管理所有内建依赖 -->
+    <!-- 依赖版本管理（子模块仅需声明groupId和artifactId，无需version） -->
     <dependencyManagement>
         <dependencies>
+            <!-- Spring Boot 官方BOM（优先使用官方管理的版本） -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -59,116 +60,47 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- 第三方 starter（Spring Boot 未内置管理） -->
+            <!-- 第三方Starter（Spring Boot未内置的） -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
                 <version>${redisson.version}</version>
             </dependency>
-
-            <dependency>
-                <groupId>com.alibaba.fastjson2</groupId>
-                <artifactId>fastjson2</artifactId>
-                <version>${fastjson.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
-
-            <dependency>
-                <groupId>nl.basjes.parse.useragent</groupId>
-                <artifactId>yauaa</artifactId>
-                <version>${yauaa.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>pro.fessional</groupId>
-                <artifactId>kaptcha</artifactId>
-                <version>${kaptcha.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.github.pagehelper</groupId>
-                <artifactId>pagehelper-spring-boot-starter</artifactId>
-                <version>${pagehelper.boot.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.github.oshi</groupId>
-                <artifactId>oshi-core</artifactId>
-                <version>${oshi.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>${commons.io.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi-ooxml</artifactId>
-                <version>${poi.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.velocity</groupId>
-                <artifactId>velocity-engine-core</artifactId>
-                <version>${velocity.version}</version>
-            </dependency>
-
-            <!-- JWT -->
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt-api</artifactId>
-                <version>${jwt.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt-impl</artifactId>
-                <version>${jwt.version}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.jsonwebtoken</groupId>
-                <artifactId>jjwt-jackson</artifactId>
-                <version>${jwt.version}</version>
-                <scope>runtime</scope>
-            </dependency>
-
-            <!-- OpenAPI 文档 -->
-            <dependency>
-                <groupId>org.springdoc</groupId>
-                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-                <version>${springdoc.version}</version>
-            </dependency>
-
-            <!-- MySQL 驱动 -->
             <dependency>
                 <groupId>com.mysql</groupId>
                 <artifactId>mysql-connector-j</artifactId>
                 <version>${mysql.version}</version>
             </dependency>
 
-            <!-- 内部模块 -->
+            <!-- 内部模块版本管理 -->
             <dependency>
                 <groupId>com.sssys.grn</groupId>
                 <artifactId>grn-framework</artifactId>
+                <version>${grn.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sssys.grn</groupId>
+                <artifactId>grn-system</artifactId>
+                <version>${grn.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sssys.grn</groupId>
+                <artifactId>grn-common</artifactId>
                 <version>${grn.version}</version>
             </dependency>
         </dependencies>
@@ -176,6 +108,7 @@
 
     <build>
         <plugins>
+            <!-- 统一编译配置（子模块继承） -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -186,14 +119,11 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-
-            <!-- 注意：父 POM 不应绑定 spring-boot-maven-plugin，
-                 应在可执行子模块（如 application）中配置 -->
         </plugins>
     </build>
 
+    <!-- 仓库配置（去重，优先中央仓库，阿里云作为备用） -->
     <repositories>
-        <!-- 优先使用 Maven Central -->
         <repository>
             <id>central</id>
             <name>Maven Central</name>
@@ -201,8 +131,6 @@
             <releases><enabled>true</enabled></releases>
             <snapshots><enabled>false</enabled></snapshots>
         </repository>
-
-        <!-- 阿里云作为备用（可选） -->
         <repository>
             <id>aliyun-public</id>
             <name>Aliyun Public</name>

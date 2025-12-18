@@ -4,11 +4,16 @@ import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import java.time.LocalDateTime;
 
+/**
+ * @Description:
+ * @Author: gaolikang
+ * @Date: 10:18 2025/12/18
+ */
 @Data
 @TableName("system_role_menu")
 public class SysRoleMenu {
     /** 主键ID */
-    @TableId(type = IdType.ASSIGN_ID)
+    @TableId
     private Long id;
 
     /** 角色ID */

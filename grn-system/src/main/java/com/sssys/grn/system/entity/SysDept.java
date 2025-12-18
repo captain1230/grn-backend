@@ -3,6 +3,7 @@ package com.sssys.grn.system.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import java.time.LocalDateTime;
+
 /**
  * @Description:
  * @Author: gaolikang

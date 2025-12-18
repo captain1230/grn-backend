@@ -4,11 +4,16 @@ import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import java.time.LocalDateTime;
 
+/**
+ * @Description:
+ * @Author: gaolikang
+ * @Date: 10:18 2025/12/18
+ */
 @Data
 @TableName("system_dict_type")
 public class SysDictType {
     /** 字典主键 */
-    @TableId(type = IdType.ASSIGN_ID)
+    @TableId
     private Long id;
 
     /** 字典名称 */

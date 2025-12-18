@@ -76,7 +76,7 @@ token:
 # MyBatis-Plus 配置
 mybatis-plus:
   # 与mybatis配置兼容，可合并配置
-  type-aliases-package: com.sssys.grn.**.domain
+  type-aliases-package: com.sssys.grn.**.entity
   mapper-locations: classpath*:mapper/**/*Mapper.xml
   configuration:
     # 开启驼峰命名转换

@@ -21,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
 public class GlobalMybatisConfig {
 
     private final CustomIdGenerator customIdGenerator;
+
     @Autowired
     public GlobalMybatisConfig(CustomIdGenerator customIdGenerator) {
         this.customIdGenerator = customIdGenerator;

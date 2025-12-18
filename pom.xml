@@ -14,6 +14,10 @@
 
     <modules>
         <module>grn-framework</module>
+        <module>grn-server</module>
+        <module>grn-system</module>
+<!--        <module>grn-common</module>-->
+
         <!-- 可在此添加其他子模块 -->
     </modules>
 
@@ -24,11 +28,11 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Spring Boot 3.2 LTS -->
-        <spring-boot.version>3.5.8</spring-boot.version>
+        <spring-boot.version>3.3.0</spring-boot.version>
 
         <!-- 第三方依赖版本（仅列出 Spring Boot 未管理或需覆盖的） -->
         <druid.version>1.2.20</druid.version>
-        <mybatis-plus.version>3.5.6</mybatis-plus.version> <!-- 兼容 Boot 3.2 -->
+        <mybatis-plus.version>3.5.7</mybatis-plus.version> <!-- 兼容 Boot 3.2 -->
         <redisson.version>3.27.2</redisson.version>
         <fastjson.version>2.0.60</fastjson.version>
         <hutool.version>5.8.22</hutool.version>
@@ -64,7 +68,7 @@
 
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
 
@@ -151,7 +155,7 @@
             <dependency>
                 <groupId>org.springdoc</groupId>
                 <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-                <version>3.0.0</version>
+                <version>${springdoc.version}</version>
             </dependency>
 
             <!-- MySQL 驱动 -->

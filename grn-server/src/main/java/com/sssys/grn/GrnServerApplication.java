@@ -10,6 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Date: 11:12 2025/12/18
  */
 @SpringBootApplication(scanBasePackages = "com.sssys.grn")
+// 显式指定 MyBatis-Plus 的 Mapper 扫描和 FactoryBean
+@MapperScan(
+        basePackages = "com.sssys.grn.system.mapper")
 public class GrnServerApplication {
     public static void main(String[] args) {
         SpringApplication.run(GrnServerApplication.class, args);

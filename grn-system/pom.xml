@@ -18,11 +18,11 @@
     <dependencies>
 
         <!-- 通用工具-->
-        <dependency>
-            <groupId>com.sssys.grn</groupId>
-            <artifactId>grn-common</artifactId>
-            <version>1.0.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.sssys.grn</groupId>-->
+<!--            <artifactId>grn-common</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>com.sssys.grn</groupId>

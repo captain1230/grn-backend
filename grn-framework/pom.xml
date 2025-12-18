@@ -66,7 +66,7 @@
         <!-- MyBatis-Plus（简化CRUD，适配Spring Boot 3） -->
         <dependency>
             <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
         </dependency>
 
         <!-- Druid连接池（阿里开源，监控+性能优） -->

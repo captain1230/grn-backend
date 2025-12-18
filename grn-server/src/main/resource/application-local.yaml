@@ -1,0 +1,146 @@
+
+# 开发环境配置
+server:
+  # 服务器的HTTP端口，默认为8080
+  port: 8082
+  servlet:
+    # 应用的访问路径
+    context-path: /
+  tomcat:
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+    # 连接数满后的排队数，默认为100
+    accept-count: 1000
+    threads:
+      # tomcat最大线程数，默认为200
+      max: 800
+      # Tomcat启动初始化的线程数，默认值10
+      min-spare: 100
+spring:
+  # 资源信息
+  messages:
+    # 国际化资源文件路径
+    basename: i18n/messages
+  #  profiles:
+  #    active: local
+  # 文件上传
+  servlet:
+    multipart:
+      # 单个文件大小
+      max-file-size: 10MB
+      # 设置总上传的文件大小
+      max-request-size: 20MB
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    # 核心：将 URL/用户名/密码放到 spring.datasource 根节点，让自动配置识别
+    url: jdbc:mysql://localhost:3306/grn_backend?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: 12345678
+    # Druid 连接池配置（保留）
+    druid:
+      initialSize: 5
+      minIdle: 10
+      maxActive: 20
+      maxWait: 60000
+      connectTimeout: 30000
+      socketTimeout: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      maxEvictableIdleTimeMillis: 900000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      webStatFilter:
+        enabled: true
+      statViewServlet:
+        enabled: true
+        allow:
+        url-pattern: /druid/*
+        login-username: grn
+        login-password: 12345678
+      filter:
+        stat:
+          enabled: true
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: true
+        wall:
+          config:
+            multi-statement-allow:
+
+#  # redis 配置（保留）
+#redis:
+#  host: localhost
+#  port: 6379
+#  database: 0
+#  password:
+#  timeout: 10s
+#  lettuce:
+#    pool:
+#      min-idle: 0
+#      max-idle: 8
+#      max-active: 8
+#      max-wait: -1ms
+## 用户配置
+#user:
+#  password:
+#    # 密码最大错误次数
+#    maxRetryCount: 5
+#    # 密码锁定时间（默认10分钟）
+#    lockTime: 10
+
+## token配置
+#token:
+#  # 令牌自定义标识
+#  header: Authorization
+#  # 令牌密钥
+#  secret: abcdefghijklmnopqrstuvwxyz
+#  # 令牌有效期（默认30分钟）
+#  expireTime: 30
+
+# MyBatis-Plus 配置
+mybatis-plus:
+  # 与mybatis配置兼容，可合并配置
+  type-aliases-package: com.sssys.grn.**.entity
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  configuration:
+    # 开启驼峰命名转换
+    map-underscore-to-camel-case: true
+    # 日志打印SQL（开发环境）
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    # 逻辑删除配置（对应数据库deleted字段）
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+## PageHelper分页插件
+#pagehelper:
+#  helperDialect: mysql
+#  supportMethodsArguments: true
+#  params: count=countSql
+
+## Swagger配置
+#swagger:
+#  # 是否开启swagger
+#  enabled: true
+#  # 请求前缀
+#  pathMapping: /dev-api
+
+## 防盗链配置
+#referer:
+#  # 防盗链开关
+#  enabled: false
+#  # 允许的域名列表
+#  allowed-domains: localhost,127.0.0.1,grn.vip,www.grn.vip
+
+## 防止XSS攻击
+#xss:
+#  # 过滤开关
+#  enabled: true
+#  # 排除链接（多个用逗号分隔）
+#  excludes: /system/notice
+#  # 匹配链接
+#  urlPatterns: /system/*,/monitor/*,/tool/*

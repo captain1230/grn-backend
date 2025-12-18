@@ -132,6 +132,6 @@
     </root>
     <!-- 仅在 local 环境开启 DEBUG -->
     <springProfile name="local">
-        <root level="DEBUG"/>
+        <root level="INFO"/>
     </springProfile>
 </configuration>

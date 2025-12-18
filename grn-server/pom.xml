@@ -20,12 +20,11 @@
 
     <dependencies>
         <!-- 依赖 system 业务模块（按需开启） -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.sssys.grn</groupId>-->
-        <!--            <artifactId>grn-system</artifactId>-->
-        <!--            <version>1.0.0</version>-->
-        <!--        </dependency>-->
-
+        <dependency>
+            <groupId>com.sssys.grn</groupId>
+            <artifactId>grn-system</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <!-- 核心依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -35,34 +34,19 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
         </dependency>
-        <!-- MySQL 驱动（按需开启，Spring Boot 会自动适配版本） -->
-        <!--        <dependency>-->
-        <!--            <groupId>com.mysql</groupId>-->
-        <!--            <artifactId>mysql-connector-j</artifactId>-->
-        <!--        </dependency>-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
-        <!-- 核心修复：删除 maven-war-plugin（与 jar 打包冲突） -->
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <!-- 移除硬编码版本，继承父工程的 Spring Boot 版本（避免版本冲突） -->
-                <configuration>
-                    <fork>true</fork>
-                    <!-- 显式指定主类（可选，确保 Spring Boot 打包正确） -->
-                    <mainClass>com.sssys.grn.GrnServerApplication</mainClass>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
-        <finalName>${project.artifactId}</finalName>
     </build>
 </project>

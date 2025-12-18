@@ -73,14 +73,22 @@ token:
   # 令牌有效期（默认30分钟）
   expireTime: 30
 
-# MyBatis配置
-mybatis:
-  # 搜索指定包别名
-  typeAliasesPackage: com.sssys.grn.**.domain
-  # 配置mapper的扫描，找到所有的mapper.xml映射文件
-  mapperLocations: classpath*:mapper/**/*Mapper.xml
-  # 加载全局的配置文件
-  configLocation: classpath:mybatis/mybatis-config.xml
+# MyBatis-Plus 配置
+mybatis-plus:
+  # 与mybatis配置兼容，可合并配置
+  type-aliases-package: com.sssys.grn.**.domain
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  configuration:
+    # 开启驼峰命名转换
+    map-underscore-to-camel-case: true
+    # 日志打印SQL（开发环境）
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    # 逻辑删除配置（对应数据库deleted字段）
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
 
 # PageHelper分页插件
 pagehelper:

@@ -13,7 +13,6 @@
 
     <name>${project.artifactId}</name>
     <description>定义基础 pojo 类、枚举、工具类等等</description>
-    <url>https://github.com/YunaiV/ruoyi-vue-pro</url>
 
     <dependencies>
         <dependency>
@@ -24,6 +23,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

@@ -1,4 +1,4 @@
-package com.sssys.grn.controller.demo;
+package com.sssys.grn.controller.system;
 
 import com.sssys.grn.system.service.impl.SysUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

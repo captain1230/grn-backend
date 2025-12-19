@@ -18,17 +18,35 @@
     </description>
 
     <dependencies>
-
         <!-- 引入业务模块（按需开启） -->
         <dependency>
             <groupId>com.sssys.grn</groupId>
             <artifactId>grn-system</artifactId>
         </dependency>
-
         <!-- Web服务核心依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 新增：OpenAPI 核心依赖（含 UI 界面） -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        </dependency>
+        <!-- 可选：支持 Security/JWT 令牌解析（如果项目用了 Spring Security + JWT） -->
+<!--        <dependency>-->
+<!--            <groupId>org.springdoc</groupId>-->
+<!--            <artifactId>springdoc-openapi-security</artifactId>-->
+<!--        </dependency>-->
+        <dependency>
+
+            <groupId>io.springfox</groupId>
+
+            <artifactId>springfox-boot-starter</artifactId>
+
+            <version>3.0.0</version>
+
         </dependency>
     </dependencies>
 

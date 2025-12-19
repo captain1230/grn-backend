@@ -144,3 +144,20 @@ mybatis-plus:
 #  excludes: /system/notice
 #  # 匹配链接
 #  urlPatterns: /system/*,/monitor/*,/tool/*
+
+# swagger-ui custom path
+springdoc:
+  swagger-ui:
+    # 修改Swagger UI路径
+    path: /swagger-ui.html
+    # 开启Swagger UI界面
+    enabled: true
+  api-docs:
+    # 修改api-docs路径
+    path: /v3/api-docstt
+    # 开启api-docs
+    enabled: true
+  # 配置需要生成接口文档的扫描包
+  packages-to-scan: com.sssys.grn.controller
+  # 配置需要生成接口文档的接口路径
+  paths-to-match: /api/**
